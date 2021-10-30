@@ -1,7 +1,7 @@
 # opensea-nft-list
 A demo project to show the list on opensea.io by address.
 
-# How to start
+## How to start
 
 first, run:
 ```
@@ -12,7 +12,7 @@ and
 yarn start
 ```
 you will see this project run at 3000 port.
-# Features 
+## Features 
 - UI layout's made by material-ui.
 - Pull nft by owner's wallet address. 
 - Show nft details at detail page. 

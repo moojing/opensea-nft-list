@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Navbar from "components/Navbar";
+import Container from "@mui/material/Container";
 
 import { apiFetchAssets } from "apis";
 // import styles from "./AssetsList.scss";
@@ -63,9 +65,18 @@ function AssetsList() {
   };
 
   return (
-    <Grid container columnSpacing={4} rowSpacing={4}>
-      {assetsList.map(renderAssetCard)}
-    </Grid>
+    <>
+      <Navbar />
+      <Container
+        sx={{
+          my: 8,
+        }}
+      >
+        <Grid container columnSpacing={4} rowSpacing={4}>
+          {assetsList.map(renderAssetCard)}
+        </Grid>
+      </Container>
+    </>
   );
 }
 AssetsList.propTypes = {};

@@ -9,23 +9,30 @@ import Navbar from "components/Navbar";
 import Container from "@mui/material/Container";
 
 import useScrollBottom from "hooks/useScrollBottom";
+import useWalletAddress from "hooks/useWalletAddress";
 import { apiFetchAssets } from "apis";
-const PAGE_SIZE = 2;
+
+const PAGE_SIZE = 20;
 function AssetsList() {
   const history = useHistory();
   const [noMoreAssets, setNoMoreAssets] = useState(false);
   const [currentPageOffset, setCurrentPageOffsetOffset] = useState(0);
   const [assetsList, setAssetsList] = useState([]);
+  const address = useWalletAddress();
+  console.log("address :", address);
 
   useEffect(() => {
-    apiFetchAssets({ offset: currentPageOffset, limit: PAGE_SIZE }).then(
-      ({ assets }) => {
-        if (!assets.length) setNoMoreAssets(true);
+    if (!address) return;
+    apiFetchAssets({
+      offset: currentPageOffset,
+      limit: PAGE_SIZE,
+      walletAddress: address,
+    }).then(({ assets }) => {
+      if (!assets.length) setNoMoreAssets(true);
 
-        setAssetsList((prev) => [...prev, ...assets]);
-      }
-    );
-  }, [currentPageOffset]);
+      setAssetsList((prev) => [...prev, ...assets]);
+    });
+  }, [currentPageOffset, address]);
 
   const onClickCard = (contractAddress, tokenId) => () => {
     history.push(`/detail/${contractAddress}/${tokenId}`);

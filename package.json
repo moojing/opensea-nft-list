@@ -22,7 +22,8 @@
     "react-show-more-text": "^1.5.0",
     "rxjs": "^7.4.0",
     "sass": "^1.43.4",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "web3": "^1.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

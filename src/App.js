@@ -10,7 +10,11 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Container>
+      <Container
+        sx={{
+          my: 8,
+        }}
+      >
         <Router>
           <Switch>
             <Route exact path="/">

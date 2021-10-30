@@ -8,6 +8,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import ShowMoreText from "react-show-more-text";
+import styles from "./AssetDetail.module.scss";
 
 function AssetDetail() {
   const { contractAddress, tokenId } = useParams();
@@ -42,7 +44,7 @@ function AssetDetail() {
           my: 4,
         }}
       >
-        <Card>
+        <Card sx={{ boxShadow: 0 }}>
           <CardMedia
             component="img"
             image={assetDetail.imageUrl}
@@ -63,28 +65,24 @@ function AssetDetail() {
             </Typography>
 
             <p>
-              {assetDetail.description} Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Officia voluptatum accusantium beatae quibusdam,
-              recusandae iste sint a illo exercitationem repudiandae deleniti
-              incidunt minima expedita quia iure minus sequi? Optio, non. Lorem
-              ipsum dolor sit amet consectetur, adipisicing elit. Officia
-              voluptatum accusantium beatae quibusdam, recusandae iste sint a
-              illo exercitationem repudiandae deleniti incidunt minima expedita
-              quia iure minus sequi? Optio, non. Lorem ipsum dolor sit amet
-              consectetur, adipisicing elit. Officia voluptatum accusantium
-              beatae quibusdam, recusandae iste sint a illo exercitationem
-              repudiandae deleniti incidunt minima expedita quia iure minus
-              sequi? Optio, non. itationem repudiandae deleniti incidunt minima
-              expedita quia iure minus sequi? Optio, non. Lorem ipsum dolor sit
-              amet consectetur, adipisicing elit. Officia voluptatum accusantium
-              beatae quibusdam, recusandae iste sint a illo exercitationem
-              repudiandae deleniti incidunt minima expedita quia iure minus
-              sequi? Optio, non itationem repudiandae deleniti incidunt minima
-              expedita quia iure minus sequi? Optio, non. Lorem ipsum dolor sit
-              amet consectetur, adipisicing elit. Officia voluptatum accusantium
-              beatae quibusdam, recusandae iste sint a illo exercitationem
-              repudiandae deleniti incidunt minima expedita quia iure minus
-              sequi? Optio, non
+              <ShowMoreText
+                lines={3}
+                more={
+                  <Button variant="outlined" size="small">
+                    Show More
+                  </Button>
+                }
+                less={
+                  <Button variant="outlined" size="small">
+                    Show Less
+                  </Button>
+                }
+                anchorClass={styles.anchor}
+                expanded={false}
+                truncatedEndingComponent={"... "}
+              >
+                {assetDetail.description}
+              </ShowMoreText>
             </p>
           </CardContent>
           <Button variant="contained" href={assetDetail.permalink} fullWidth>

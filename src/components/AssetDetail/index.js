@@ -64,26 +64,24 @@ function AssetDetail() {
               {assetDetail.name}
             </Typography>
 
-            <p>
-              <ShowMoreText
-                lines={3}
-                more={
-                  <Button variant="outlined" size="small">
-                    Show More
-                  </Button>
-                }
-                less={
-                  <Button variant="outlined" size="small">
-                    Show Less
-                  </Button>
-                }
-                anchorClass={styles.anchor}
-                expanded={false}
-                truncatedEndingComponent={"... "}
-              >
-                {assetDetail.description}
-              </ShowMoreText>
-            </p>
+            <ShowMoreText
+              lines={3}
+              more={
+                <Button variant="outlined" size="small">
+                  Show More
+                </Button>
+              }
+              less={
+                <Button variant="outlined" size="small">
+                  Show Less
+                </Button>
+              }
+              anchorClass={styles.anchor}
+              expanded={false}
+              truncatedEndingComponent={"... "}
+            >
+              {assetDetail.description}
+            </ShowMoreText>
           </CardContent>
           <Button variant="contained" href={assetDetail.permalink} fullWidth>
             Permalink

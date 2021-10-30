@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -8,21 +8,31 @@ import Typography from "@mui/material/Typography";
 import Navbar from "components/Navbar";
 import Container from "@mui/material/Container";
 
+import useScrollBottom from "hooks/useScrollBottom";
 import { apiFetchAssets } from "apis";
-// import styles from "./AssetsList.scss";
 function AssetsList() {
   const history = useHistory();
+  const [noMoreAssets, setNoMoreAssets] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
   const [assetsList, setAssetsList] = useState([]);
   useEffect(() => {
-    apiFetchAssets({ offset: 0, limit: 6 }).then(({ assets }) => {
-      console.log(assets);
-      setAssetsList(assets);
+    apiFetchAssets({ offset: currentPage, limit: 2 }).then(({ assets }) => {
+      if (!assets.length) setNoMoreAssets(true);
+
+      setAssetsList((prev) => [...prev, ...assets]);
     });
-  }, []);
+  }, [currentPage]);
 
   const onClickCard = (contractAddress, tokenId) => () => {
     history.push(`/detail/${contractAddress}/${tokenId}`);
   };
+
+  const onScrollBottom = useCallback(() => {
+    if (noMoreAssets) return;
+    setCurrentPage((prev) => prev + 1);
+  }, [noMoreAssets]);
+
+  useScrollBottom(onScrollBottom);
 
   const renderAssetCard = ({
     id,
@@ -33,9 +43,8 @@ function AssetsList() {
   }) => {
     const contractAddress = asset_contract.address;
     return (
-      <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Grid item xs={12} sm={6} md={4} lg={3} key={id}>
         <Card
-          key={id}
           sx={{ cursor: "pointer" }}
           onClick={onClickCard(contractAddress, token_id)}
         >

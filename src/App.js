@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import Navbar from "components/Navbar";
 import AssetsList from "components/AssetsList";
 import AssetDetail from "components/AssetDetail";
+import NotFound from "components/NotFound";
 
 function App() {
   return (
@@ -20,8 +21,11 @@ function App() {
             <Route exact path="/">
               <AssetsList />
             </Route>
-            <Route path="/detail/:tokenId">
+            <Route path="/detail/:contractAddress/:tokenId">
               <AssetDetail />
+            </Route>
+            <Route>
+              <NotFound />
             </Route>
           </Switch>
         </Router>

@@ -15,8 +15,8 @@ export const apiFetchAssets = ({ offset = 0, limit = 20 }) =>
     },
   }).then((res) => res.data);
 
-export const apiFetchAssetDetail = (tokenId) =>
+export const apiFetchAssetDetail = (contractAddress, tokenId) =>
   axios({
     method: "get",
-    url: `${BASE_URL}/api/v1/asset/${WALLET_ADDRESS}/${tokenId}`,
+    url: `${BASE_URL}/api/v1/asset/${contractAddress}/${tokenId}`,
   }).then((res) => res.data);

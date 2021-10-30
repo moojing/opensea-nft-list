@@ -1,4 +1,6 @@
 import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Container from "@mui/material/Container";
 import Navbar from "components/Navbar";
 import AssetsList from "components/AssetsList";
@@ -9,8 +11,16 @@ function App() {
     <div className="App">
       <Navbar />
       <Container>
-        <AssetsList />
-        <AssetDetail />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <AssetsList />
+            </Route>
+            <Route path="/detail/:tokenId">
+              <AssetDetail />
+            </Route>
+          </Switch>
+        </Router>
       </Container>
     </div>
   );

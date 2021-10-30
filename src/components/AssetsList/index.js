@@ -16,7 +16,7 @@ function AssetsList() {
   const [noMoreAssets, setNoMoreAssets] = useState(false);
   const [currentPageOffset, setCurrentPageOffsetOffset] = useState(0);
   const [assetsList, setAssetsList] = useState([]);
-  console.log("assetsList :", assetsList);
+
   useEffect(() => {
     apiFetchAssets({ offset: currentPageOffset, limit: PAGE_SIZE }).then(
       ({ assets }) => {

@@ -23,7 +23,6 @@ function AssetDetail() {
 
   useEffect(() => {
     apiFetchAssetDetail(contractAddress, tokenId).then((data) => {
-      console.log(data);
       const { image_url, name, description, permalink, collection } = data;
       setAssetDetail({
         imageUrl: image_url,
